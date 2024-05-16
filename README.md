@@ -1,8 +1,8 @@
 To set up a RabbitMQ environment using Docker Compose and define queues, you can follow these steps:
 
-1. Create a file named `docker-compose.yml` and open it for editing.
+1. Follow a file created named `docker-compose.yml` and open it for editing.
 
-2. Add the following contents to the `docker-compose.yml` file:
+2. Check the following contents to the `docker-compose.yml` file:
 
 ```yaml
 version: '3'
