@@ -1,98 +1,91 @@
-Pre-Setup Sensors Config 
+# DEMO IoT Server
 
-spring:
-  profiles:
-    active: default
+Welcome to the DEMO IoT Server! This server simulates an Internet of Things (IoT) environment where temperature and humidity sensors send their measurements. The server uses RabbitMQ as a message broker to handle the incoming sensor data.
 
-sensors:
-  - type: temperature
-    id: t1
-    unit: "C°"
-    thresholds:
-      - 0
-      - 35
-  - type: humidity
-    id: h1
-    unit: "%"
-    thresholds:
-      - 0
-      - 50
+## Getting Started
 
+To get started with the DEMO IoT Server, follow these steps:
 
-To set up a RabbitMQ environment using Docker Compose and define queues, you can follow these steps:
+### Step 1: Set up RabbitMQ
 
-1. Follow a file created named `docker-compose.yml` and open it for editing.
+1. Make sure you have Docker installed on your machine.
 
-2. Check the following contents to the `docker-compose.yml` file:
+2. Create a file named `docker-compose.yml` and add the following contents:
 
-```yaml
-version: '3'
-services:
-  rabbitmq:
-    image: rabbitmq:3.8.17-management
-    ports:
-      - "5672:5672"
-      - "15672:15672"
-    volumes:
-      - ./definitions.json:/etc/rabbitmq/definitions.json
-    environment:
-      - RABBITMQ_DEFAULT_USER=admin
-      - RABBITMQ_DEFAULT_PASS=admin
-    networks:
-      - rabbitmq-network
+   ```yaml
+   version: '3'
+   services:
+     rabbitmq:
+       image: rabbitmq:3.8.17-management
+       ports:
+         - "5672:5672"
+         - "15672:15672"
+       volumes:
+         - ./definitions.json:/etc/rabbitmq/definitions.json
+       environment:
+         - RABBITMQ_DEFAULT_USER=admin
+         - RABBITMQ_DEFAULT_PASS=admin
+       networks:
+         - rabbitmq-network
+   
+   networks:
+     rabbitmq-network:
+       driver: bridge
+   ```
 
-networks:
-  rabbitmq-network:
-    driver: bridge
-```
+3. Create a file named `definitions.json` and add the following contents:
 
-3. Create a file named `definitions.json` and open it for editing.
+   ```json
+   {
+     "queues": [
+       {
+         "name": "temperature_queue",
+         "vhost": "/",
+         "auto_delete": false
+       },
+       {
+         "name": "humidity_queue",
+         "vhost": "/",
+         "auto_delete": false
+       }
+     ]
+   }
+   ```
 
-4. Add the following contents to the `definitions.json` file to define the queues:
+4. Save both files (`docker-compose.yml` and `definitions.json`) in the same directory.
 
-```json
-{
-  "queues": [
-    {
-      "name": "temperature_queue",
-      "vhost": "/",
-      "auto_delete": false
-    },
-    {
-      "name": "humidity_queue",
-      "vhost": "/",
-      "auto_delete": false
-    }
-  ]
-}
-```
+5. Open a terminal or command prompt, navigate to the directory where the files are located, and run the following command to start RabbitMQ:
 
-5. Save both files (`docker-compose.yml` and `definitions.json`) in the same directory.
+   ```
+   docker-compose up
+   ```
 
-6. Open a terminal or command prompt and navigate to the directory where the files are saved.
+   RabbitMQ will start with the management interface accessible at `http://localhost:15672` (username: `admin`, password: `admin`).
 
-7. Run the following command to start the RabbitMQ containers:
+### Step 2: Run the DEMO IoT Server
 
-```
-docker-compose up
-```
+1. Download and set up the DEMO IoT Server application on your machine.
 
-This will start the RabbitMQ container with management interface accessible at `http://localhost:15672` (username: `admin`, password: `admin`).
+2. Configure the RabbitMQ connection information in the application's configuration file.
 
-8. You can now use the netcat commands mentioned earlier to send data to the respective queues:
+3. Start the DEMO IoT Server application.
 
-For temperature:
+### Step 3: Simulate Sensor Data
 
-```
-echo "sensor_id=h1; value=40" | nc -u localhost 3344
-```
+The DEMO IoT Server application is now ready to receive sensor data. You can simulate sensor measurements by sending UDP packets using the netcat command or any other UDP client.
 
-For humidity:
+- To send temperature data, use the following command:
 
-```
-echo "sensor_id=h1; value=60" | nc -u localhost 3355
-```
+  ```
+  echo "sensor_id=t1; value=25" | nc -u localhost 3344
+  ```
 
-The data will be sent to the corresponding queues (`temperature_queue` and `humidity_queue`) in RabbitMQ.
+  This command sends a temperature measurement with a value of 25 to the `temperature_queue`.
 
-Remember to adjust the commands and configuration as needed.
+- To send humidity data, use the following command:
+
+  ```
+  echo "sensor_id=h1; value=40" | nc -u localhost 3355
+  ```
+
+  This command sends a humidity measurement with a value
