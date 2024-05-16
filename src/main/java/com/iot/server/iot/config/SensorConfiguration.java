@@ -1,25 +1,22 @@
 package com.iot.server.iot.config;
-import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-@Component
-@ConfigurationProperties(prefix = "sensors")
-public class SensorProperties {
-    private List<SensorConfig> sensors;
+public class SensorConfiguration {
+    private List<Sensor> sensors;
 
-    public List<SensorConfig> getSensors() {
+    public List<Sensor> getSensors() {
         return sensors;
     }
 
-    public void setSensors(List<SensorConfig> sensors) {
+    public void setSensors(List<Sensor> sensors) {
         this.sensors = sensors;
     }
 
-    public static class SensorConfig {
+    public static class Sensor {
         private String type;
         private String id;
+        private String unit;
         private List<Integer> thresholds;
 
         public String getType() {
@@ -36,6 +33,14 @@ public class SensorProperties {
 
         public void setId(String id) {
             this.id = id;
+        }
+
+        public String getUnit() {
+            return unit;
+        }
+
+        public void setUnit(String unit) {
+            this.unit = unit;
         }
 
         public List<Integer> getThresholds() {

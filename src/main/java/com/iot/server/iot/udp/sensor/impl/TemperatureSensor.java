@@ -1,7 +1,8 @@
 package com.iot.server.iot.udp.sensor.impl;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.iot.server.iot.config.SensorProperties;
+import com.iot.server.iot.config.SensorConfiguration;
+import com.iot.server.iot.config.SensorConfigurationProperties;
 import com.iot.server.iot.model.Measurement;
 import com.iot.server.iot.udp.sensor.model.Sensor;
 import com.iot.server.iot.udp.sensor.model.SensorType;
@@ -14,10 +15,10 @@ public class TemperatureSensor extends Sensor {
 
     private final RabbitTemplate rabbitTemplate;
     private final ObjectMapper objectMapper;
-    private final SensorProperties sensorProperties;
+    private final SensorConfigurationProperties sensorProperties;
 
     @Autowired
-    public TemperatureSensor(RabbitTemplate rabbitTemplate, ObjectMapper objectMapper, SensorProperties sensorProperties) {
+    public TemperatureSensor(RabbitTemplate rabbitTemplate, ObjectMapper objectMapper, SensorConfigurationProperties sensorProperties) {
         this.rabbitTemplate = rabbitTemplate;
         this.objectMapper = objectMapper;
         this.sensorProperties = sensorProperties;
@@ -29,7 +30,7 @@ public class TemperatureSensor extends Sensor {
         return sensorProperties.getSensors().stream()
                 .filter(sensor -> sensor.getType().equalsIgnoreCase("temperature"))
                 .findFirst()
-                .map(SensorProperties.SensorConfig::getId)
+                .map(SensorConfiguration.Sensor::getId)
                 .orElseThrow(() -> new IllegalArgumentException("Temperature sensor configuration not found"));
     }
 

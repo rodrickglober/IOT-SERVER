@@ -5,11 +5,13 @@ spring:
 sensors:
   - type: temperature
     id: t1
+    unit: "C°"
     thresholds:
       - -20
       - 40
   - type: humidity
     id: h1
+    unit: "%"
     thresholds:
       - -10
       - 40
