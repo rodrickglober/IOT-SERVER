@@ -1,0 +1,14 @@
+{
+  "queues": [
+    {
+      "name": "temperature_queue",
+      "vhost": "/",
+      "auto_delete": false
+    },
+    {
+      "name": "humidity_queue",
+      "vhost": "/",
+      "auto_delete": false
+    }
+  ]
+}

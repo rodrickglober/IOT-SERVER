@@ -1,0 +1,15 @@
+spring:
+  profiles:
+    active: default
+
+sensors:
+  - type: temperature
+    id: t1
+    thresholds:
+      - -20
+      - 40
+  - type: humidity
+    id: h1
+    thresholds:
+      - -10
+      - 40
