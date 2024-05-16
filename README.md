@@ -1,3 +1,24 @@
+Pre-Setup Sensors Config 
+
+spring:
+  profiles:
+    active: default
+
+sensors:
+  - type: temperature
+    id: t1
+    unit: "C°"
+    thresholds:
+      - 0
+      - 35
+  - type: humidity
+    id: h1
+    unit: "%"
+    thresholds:
+      - 0
+      - 50
+
+
 To set up a RabbitMQ environment using Docker Compose and define queues, you can follow these steps:
 
 1. Follow a file created named `docker-compose.yml` and open it for editing.
