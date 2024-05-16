@@ -1,7 +1,6 @@
 package com.iot.server.iot.service.central;
 
 import com.iot.server.iot.config.SensorConfiguration;
-import com.iot.server.iot.config.SensorConfigurationProperties;
 import com.iot.server.iot.model.Measurement;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -17,7 +16,7 @@ public class CentralService {
         this.sensors = sensors;
     }
 
-    public void trackEvent(Measurement measurement) {
+    public void checkForThresHoldAndTriggerAlert(Measurement measurement) {
         String sensorId = measurement.getSensorId();
         double value = measurement.getValue();
         SensorConfiguration.Sensor sensorConfig = sensors.stream()

@@ -12,6 +12,7 @@ public class WareHouseService {
 
     public void collect(Measurement measurement){
        //Add other logic before collect as audit
-        centralService.trackEvent(measurement);
+        centralService.checkForThresHoldAndTriggerAlert(measurement);
+       // Add extra logic after event
     }
 }

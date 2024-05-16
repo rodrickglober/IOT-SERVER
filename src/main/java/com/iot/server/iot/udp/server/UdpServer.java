@@ -49,7 +49,7 @@ public class UdpServer {
         System.out.println("WAITING FOR NEW EVENTS");
     }
 
-    private void startSensorServer(int port, String sensorType) throws Exception {
+    void startSensorServer(int port, String sensorType) throws Exception {
         DatagramSocket socket = new DatagramSocket(port);
         byte[] buffer = new byte[BUFFER_SIZE];
         DatagramPacket packet = new DatagramPacket(buffer, buffer.length);
