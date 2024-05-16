@@ -1,6 +1,6 @@
-# DEMO IoT Server
+# DEMO IOT Server
 
-Welcome to the DEMO IoT Server! This server simulates an Internet of Things (IoT) environment where temperature and humidity sensors send their measurements. The server uses RabbitMQ as a message broker to handle the incoming sensor data.
+Welcome to the DEMO IOT Server! This server simulates an Internet of Things (IOT) environment where temperature and humidity sensors send their measurements. The server uses RabbitMQ as a message broker to handle the incoming sensor data.
 
 ## Getting Started
 
