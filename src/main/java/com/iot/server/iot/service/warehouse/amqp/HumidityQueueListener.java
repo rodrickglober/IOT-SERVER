@@ -18,8 +18,8 @@ public class HumidityQueueListener {
         this.wareHouseService = wareHouseService;
     }
 
-    @RabbitListener(queues = "humidity_queue")
-    public void receiveTemperatureMessage(String message) {
+   @RabbitListener(queues = "humidity_queue")
+    public void receiveHumidityMessage(String message) {
         try {
             Measurement measurement = objectMapper.readValue(message, Measurement.class);
             wareHouseService.collect(measurement);

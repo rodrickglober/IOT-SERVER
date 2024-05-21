@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.iot.server.iot.config.SensorConfiguration;
 import com.iot.server.iot.config.SensorConfigurationProperties;
 import com.iot.server.iot.model.Measurement;
+import com.iot.server.iot.service.warehouse.WareHouseService;
 import com.iot.server.iot.udp.sensor.model.Sensor;
 import com.iot.server.iot.udp.sensor.model.SensorType;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
@@ -16,12 +17,15 @@ public class HumiditySensor extends Sensor {
     private final ObjectMapper objectMapper;
     private final SensorConfigurationProperties sensorProperties;
 
+    private  final WareHouseService wareHouseService;
+
 
     @Autowired
-    public HumiditySensor(RabbitTemplate rabbitTemplate, ObjectMapper objectMapper, SensorConfigurationProperties sensorProperties) {
+    public HumiditySensor(RabbitTemplate rabbitTemplate, ObjectMapper objectMapper, SensorConfigurationProperties sensorProperties,WareHouseService wareHouseService) {
         this.rabbitTemplate = rabbitTemplate;
         this.objectMapper = objectMapper;
         this.sensorProperties = sensorProperties;
+        this.wareHouseService = wareHouseService;
 
     }
 

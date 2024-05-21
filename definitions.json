@@ -3,12 +3,16 @@
     {
       "name": "temperature_queue",
       "vhost": "/",
-      "auto_delete": false
+      "auto_delete": false,
+      "exchange": "temperature_exchange",
+      "routing_key": "temperature"
     },
     {
       "name": "humidity_queue",
       "vhost": "/",
-      "auto_delete": false
+      "auto_delete": false,
+      "exchange": "humidity_exchange",
+      "routing_key": "humidity"
     }
   ]
 }
